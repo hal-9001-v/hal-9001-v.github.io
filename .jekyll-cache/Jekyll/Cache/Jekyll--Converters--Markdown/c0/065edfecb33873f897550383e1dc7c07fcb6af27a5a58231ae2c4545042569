@@ -1,0 +1,152 @@
+I"º<p>I have participated in a few jams and some projects. Here are some of them!</p>
+
+<h2 id="my-work">My Work</h2>
+<html>
+
+<body>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://danieljimenezmorales.itch.io/003">
+						<img src="../assets/img/portfolio/003.png" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://danieljimenezmorales.itch.io/003">
+							<h5 class="card-title">003</h5>
+						</a>
+						<p class="card-text">Psychological Terror game set in an abandoned bunker.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://dexaxi.itch.io/holobots-stadium">
+						<img src="../assets/img/portfolio/holobots.png" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://dexaxi.itch.io/holobots-stadium">
+							<h5 class="card-title">Holobots Stadium</h5>
+						</a>
+						<p class="card-text">XCOM-like strategy game with mechas with procedural levels.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://cannibal-coconut.itch.io/mozza-race">
+						<img src="../assets/img/portfolio/mozzarace.png" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://cannibal-coconut.itch.io/mozza-race">
+							<h5 class="card-title">Mozzarace</h5>
+						</a>
+						<p class="card-text">Light side scroll runner aimed to gathering pizza ingredients.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://dexaxi.itch.io/draway">
+						<img src="../assets/img/portfolio/Draway.png" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://dexaxi.itch.io/draway">
+							<h5 class="card-title">Draway</h5>
+						</a>
+						<p class="card-text">Simple tower-defence jam game with custom pixel destruction.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://dexaxi.itch.io/gods-pub">
+						<img src="../assets/img/Portfolio/Gods Pub.png" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://dexaxi.itch.io/gods-pub">
+							<h5 class="card-title">God's Pub</h5>
+						</a>
+						<p class="card-text">Procedural roguelite jam game with strong inspiration in The Binding of
+							Isaac.</p>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://dexaxi.itch.io/wonder-wall">
+						<img src="../assets/img/Portfolio/Wonderwall.png" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://dexaxi.itch.io/wonder-wall">
+							<h5 class="card-title">Wonderwall</h5>
+						</a>
+						<p class="card-text">Crazy and cinematic platform jam game about walking walls.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class=" bg-dark">
+			<div class="container">
+				<div class="row-md-4">
+					<div class="container">
+						<!-- Banner-->
+
+						<div class="col-md-12 text-center">
+							<h2 style="color:white">Other</h2>
+						</div>
+						<!--Banner-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://twitter.com/btfl_game">
+						<img src="../assets/img/Portfolio/BTFL.jpg" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://twitter.com/btfl_game">
+							<h5 class="card-title">BTFL</h5>
+						</a>
+						<p class="card-text">I collaborate in the BTFL project too.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card w-100 h-100">
+					<a href="https://vicma.itch.io">
+						<img src="../assets/img/portfolio/itchio.png" class="card-img-top" alt="..." />
+					</a>
+					<div class="card-body">
+						<a href="https://vicma.itch.io">
+							<h5 class="card-title">Itchio Dashboard</h5>
+						</a>
+						<p class="card-text">Check out my other games too!</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Games-->
+</div></body></html>
+:ET

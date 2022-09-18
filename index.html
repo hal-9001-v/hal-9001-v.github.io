@@ -1,219 +1,38 @@
-<!DOCTYPE HTML>
-<html>
+---
+layout: main
+---
+{% for post in paginator.posts %}
 
-<head>
-	<title>Vicente Aguilera Portfolio</title>
+{% endfor %}
 
-	<link rel="stylesheet" href="main.css">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-		crossorigin="anonymous"></script>
-</head>
+<div id="archives">
+{% for category in site.categories %}
+  <div class="archive-group">
+    {% capture category_name %}{{ category | first }}{% endcapture %}
+    <div id="#{{ category_name | slugize }}"></div>
+    <p></p>
 
-<body>
+    <h2 class="category-head">{{ category_name }}</h2>
+    <a name="{{ category_name | slugize }}"></a>
 
+    {% for post in site.categories[category_name] %}
+    
+    <article class="post">
+      {% if post.img %}
+        <a class="post-thumbnail" style="background-image: url({{"/assets/img/" | prepend: site.baseurl | append : post.img}})" href="{{post.url | prepend: site.baseurl}}"></a>
+      {% endif %}
+      <div class="post-content">
+        <h2 class="post-title"><a href="{{post.url | prepend: site.baseurl}}">{{post.title}}</a></h2>
+        <h4>{{post.description}}</h4>
+        <p>{{ post.content | strip_html | truncatewords: 15 }}</p>
+        <span class="post-date">{{post.date | date: '%Y, %b %d'}}&nbsp;&nbsp;&nbsp;—&nbsp;</span>
+        <span class="post-words">{% capture words %}{{ post.content | number_of_words }}{% endcapture %}{% unless words contains "-" %}{{ words | plus: 250 | divided_by: 250 | append: " minute read" }}{% endunless %}</span>
+      </div>
+    </article>
+    {% endfor %}
 
-	<div class="bg-dark">
-		<div class="container">
-			<h1 style="color:white">Vicente Aguilera, Game Programmer</h1>
-		</div>
+  </div>
+{% endfor %}
+</div>
 
-		<div class="container">
-			<div class="row">
-				<!-- Contact-->
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-
-						<p class="card-text"><img src="images/Outlook.png" style="width: 3rem;" class="img-fluid"
-								alt="..."><a href="mailto:vmag2001minus1@hotmail.com">vmag2001minus1@hotmail.com</a></p>
-
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="card" style="width: 16rem;">
-						<p class="card-text"> <img src="images/itchio.png" style="width: 3rem;" class="img-fluid"
-								alt="..."><a href="https://vicma.itch.io">Vicma</a></p>
-
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="card" style="width: 16rem;">
-						<p class="card-text"> <img src="images/github.png" style="width: 3rem;" class="img-fluid"
-								alt="..."><a href="https://github.com/hal-9001-v">hal-9001-v</a></p>
-
-					</div>
-				</div>
-
-				<!-- Contact-->
-			</div>
-		</div>
-
-	</div>
-	<div class=" bg-dark">
-		<div class="container">
-			<div class="row-md-4">
-				<div class="container">
-					<!-- Banner-->
-					<!--Banner-->
-				</div>
-			</diV>
-		</div>
-	</div>
-
-	<div class="container">
-
-		<!-- Games-->
-		<div class="class-col-md-12 text-center">
-			<h3>These are my games</h3>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://danieljimenezmorales.itch.io/003">
-						<img src="images/003.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://danieljimenezmorales.itch.io/003">
-							<h5 class="card-title">003</h5>
-						</a>
-						<p class="card-text">Psychological Terror game set in an abandoned bunker.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://dexaxi.itch.io/holobots-stadium">
-						<img src="images/holobots.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://dexaxi.itch.io/holobots-stadium">
-							<h5 class="card-title">Holobots Stadium</h5>
-						</a>
-						<p class="card-text">XCOM-like strategy game with mechas with procedural levels.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://cannibal-coconut.itch.io/mozza-race">
-						<img src="images/mozzarace.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://cannibal-coconut.itch.io/mozza-race">
-							<h5 class="card-title">Mozzarace</h5>
-						</a>
-						<p class="card-text">Light side scroll runner aimed to gathering pizza ingredients.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://dexaxi.itch.io/draway">
-						<img src="images/Draway.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://dexaxi.itch.io/draway">
-							<h5 class="card-title">Draway</h5>
-						</a>
-						<p class="card-text">Simple tower-defence jam game with custom pixel destruction.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://dexaxi.itch.io/gods-pub">
-						<img src="images/Gods Pub.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://dexaxi.itch.io/gods-pub">
-							<h5 class="card-title">God's Pub</h5>
-						</a>
-						<p class="card-text">Procedural roguelite jam game with strong inspiration in The Binding of
-							Isaac.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://dexaxi.itch.io/wonder-wall">
-						<img src="images/Wonderwall.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://dexaxi.itch.io/wonder-wall">
-							<h5 class="card-title">Wonderwall</h5>
-						</a>
-						<p class="card-text">Crazy and cinematic platform jam game about walking walls.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</div>
-	<!-- Games-->
-
-	<div class=" bg-dark">
-		<div class="container">
-			<div class="row-md-4">
-				<div class="container">
-					<!-- Banner-->
-
-					<div class="col-md-12 text-center">
-						<h2 style="color:white">Other</h2>
-					</div>
-					<!--Banner-->
-				</div>
-			</diV>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://twitter.com/btfl_game">
-						<img src="images/BTFL.jpg" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://twitter.com/btfl_game">
-							<h5 class="card-title">BTFL</h5>
-						</a>
-						<p class="card-text">I collaborate in the BTFL project too.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card" style="width: 25rem;">
-					<a href="https://vicma.itch.io">
-						<img src="images/itchio.png" class="card-img-top" alt="...">
-					</a>
-					<div class="card-body">
-						<a href="https://vicma.itch.io">
-							<h5 class="card-title">Itchio Dashboard</h5>
-						</a>
-						<p class="card-text">Check out my other games too!</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--Other-->
-	</div>
-
-	</div>
-	<div class="bg-dark">
-		<div class="container">
-
-		</div>
-
-	</div>
-</body>
-
-</html>
+{% include pagination.html %}
