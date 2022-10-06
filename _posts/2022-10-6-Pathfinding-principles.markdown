@@ -52,7 +52,7 @@ It goes like this:
 #### Space
 I have no idea for now how to procedurally read the environment to make a discretized representation, but I what I know is some of the ways to represent the environment!
 
-> Take a look at Nathan R. Sturtevant Game AI Pro 360P's Search Space Representation
+> Take a look at Nathan R. Sturtevant's Game AI Pro 360P's Search Space Representation
 
 ##### Grid
 This one is the easiest. It simply makes an uniform net wich covers all the space. If there is wall in (X,Y), then grid[x][y] = Wall. This is really easy for manual changes, since it could be easily represented in a text file.
