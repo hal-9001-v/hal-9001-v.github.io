@@ -42,7 +42,7 @@ Let's get into it.
 ### The Basics
 It goes like this:
 
-* Agents(bad guys, animals...) want to move around the space.
+* Agents(bad guys, animals...) want to move around in space.
 * Space has to be represented in code so it is easily interpreted.
     * This is the hard part. This task could be divided in:
         * Figuring out what the enviroment's collisions mean for the agents's navigation
