@@ -49,7 +49,9 @@ and lowest coordinate of such span.
 <div class>
     <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Unitybasis.png" class="rounded"/>
 </div>
+
 <br/>
+
 Keep in mind that when it comes to Unity, X and Z axis are horizontal. while Y is vertical.
 
 What is a span? A span is a vertical colliding section in horzintal (X,Y)coordinates, so there can be many "spans" in a single "tile". From now on, let's call tile to a (X,Z) location, with all its (Y)vertical spans.
@@ -57,6 +59,8 @@ What is a span? A span is a vertical colliding section in horzintal (X,Y)coordin
 <div class>
     <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Tilescheme.png" class="rounded" width="600"/>
 </div>
+
+<br/>
 
 For each tile, store its vertical spans. Each vertical span, has its maxY coordinate and minY coordinate. For that reason, keep a list of spans in each tile.
 If a voxel detects as colliding, you have a new span. But, if threre is an existing span contiguous span, expand the minY or maxY of such span and don't add a new span to the list.
@@ -258,5 +262,7 @@ There you have it!
 <div>
     <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Simplevoxel.png" class="rounded"/>
 </div>
+
+<br/>
 
 Take a look at the at that floating blue volume and its voxelization. It is covered by single cubic shapes made from voxels, with separated spans below it which is contained aswell in the same tiles.
