@@ -3,7 +3,7 @@ layout: post
 title: Navmesh generation Part One - Voxelization
 date: 2022-10-6 00:00:20 +0300
 description: Voxelize a 3D world in Unity
-img: Pathfindingvoxel/Simplevoxel.png # Add image post (optional)
+img: Pathfindingvoxel/Simplevoxel.PNG # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Unity, Learn, Pathfinding]
 category: Unity
@@ -47,7 +47,7 @@ When it is on top, of course! Still, storing tiles huge ammounts of stacked up n
 and lowest coordinate of such span.
 
 <div class>
-    <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Unitybasis.png" class="rounded"/>
+    <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Unitybasis.PNG" class="rounded"/>
 </div>
 <br/>
 Keep in mind that when it comes to Unity, X and Z axis are horizontal. while Y is vertical.
@@ -256,7 +256,7 @@ private void OnDrawGizmos()
 There you have it! 
 
 <div>
-    <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Simplevoxel.png" class="rounded"/>
+    <img src="{{site.baseurl}}/assets/img/Pathfindingvoxel/Simplevoxel.PNG" class="rounded"/>
 </div>
 
 Take a look at the at that floating blue volume and its voxelization. It is covered by single cubic shapes made from voxels, with separated spans below it which is contained aswell in the same tiles.
