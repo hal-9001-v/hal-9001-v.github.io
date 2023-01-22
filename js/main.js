@@ -698,7 +698,7 @@ barrierActions.push(new CallbackAction(spotlight, function (caller) {
 
 const room = new Room(scene, "Room");
 
-const report = new Report(scene, "Report");
+//const report = new Report(scene, "Report");
 const cameraPositioner = new CameraPositioner(scene, "CameraPositioner");
 cameraPositioner.goToStart(2000);
 
