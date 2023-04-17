@@ -3,7 +3,7 @@ layout: post
 title: Climbing Deforming Meshes - Part One
 date: 2023-01-5 00:00:20 +0300
 description: One of the most iconic games in history's big secret
-img: Deformingmeshes/SOTC.png
+img: DeformingMeshes/SOTC.png
 fig-caption: # Add figcaption (optional)
 tags: [Unity, Learn, SotC]
 category: Unity
