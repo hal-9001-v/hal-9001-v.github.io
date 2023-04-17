@@ -10,8 +10,6 @@ category: Unity
 ---
 As a member of the BTFL project, I was tasked with the challenge of creating a climbing system similar to that of Shadow of the Colossus (SotC). It proved to be a complex problem. Since I could not find sufficient information online, I made a three-chapter tutorial to simplify the issue for future programmers who come across this same problem.
 
-
-
 Chapter 1 introduces the problem and covers the fundamental solution, while chapter 2 covers implementing the solution, and chapter 3 deals with the resolution of performance issues and troubleshooting any problems.
 
 <br>
@@ -19,6 +17,7 @@ Chapter 1 introduces the problem and covers the fundamental solution, while chap
 ## What is this all about ##
 In SotC, the player navigates giant creatures known as colossi. Each colossus serves as an interactive puzzle, requiring a specific climbing technique to be solved effectively. The animation of these colossi is magnificent, incorporating both FK and procedural movements, allowing the game to apply climbing to an ever-changing environment, far from other games' simple wall climbing.
 
+<br>
 <div class>
     <img src="{{site.baseurl}}/assets/img/DeformingMeshes/ClimbingExamples.png" class="rounded" width="600"/>
 </div>
@@ -32,6 +31,7 @@ SotC is a technical masterpiece that is challenging to compare to other games ev
 ## The problem ##
 The issue at hand is maneuvering the player character through the deforming high-poly mesh that comprises the colossus's body. Climbing a static mesh is easy in comparison, as the wall's movement can be adpated through parenting the player to the wall. In contrast, the colossus mesh is a far more complicated, deforming entity affected by weighted sums of the nearby bones' transform, making climbing quite a problem.
 
+<br>
 <div class>
     <img src="{{site.baseurl}}/assets/img/DeformingMeshes/climbing.gif" class="rounded" width="600"/>
 </div>
@@ -42,6 +42,7 @@ The issue at hand is maneuvering the player character through the deforming high
 ## The basic solution ## 
 We can't parent the player to a bone. So, what should we do?
 
+<br>
 <div class>
     <img src="{{site.baseurl}}/assets/img/DeformingMeshes/AttachedTriangle.png" class="rounded" width="600"/>
 </div>
