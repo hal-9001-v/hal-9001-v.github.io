@@ -38,7 +38,7 @@ The issue at hand is maneuvering the player character through the deforming high
 <br>
 *Thanks to Jaikhay for this gif from the early stages of the game.*
 
-
+<br>
 ## The basic solution ## 
 We can't parent the player to a bone. So, what should we do?
 
