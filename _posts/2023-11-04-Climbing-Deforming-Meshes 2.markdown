@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Climbing Deforming Meshes - Part Two, Maths
-date: 2023-01-5 00:00:21 +0300
+date: 2023-03-10 00:00:21 +0300
 description: The basic workings of SotC's climbing
 img: Deformingmeshes/AttachedTriangle.png
 fig-caption: # Add figcaption (optional)
@@ -170,7 +170,7 @@ Under these circumstances, we have to find out the closest point in the triangle
 
     public Vector3 FindClosestPoint(MeshCollider collider)
     {
-
+        ...
     }
 
     public Vector3 GetUpdatedClimbPosition(){
