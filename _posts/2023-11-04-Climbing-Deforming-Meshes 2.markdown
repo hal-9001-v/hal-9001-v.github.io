@@ -9,6 +9,8 @@ tags: [Unity, Learn, Climbing]
 category: Unity
 ---
 
+First of all, I understand that this post is quite difficult and abstract. I didn't make it a good tutorial... If you need some help, contact me to my email <a href="mailto:vmag2001minus1@hotmail.com">vmag2001minus1@hotmail.com</a>!
+
 Last chapter we talked about the approach we should take. Let's go through the steps needed to achieve it:
 
 1. Identify the closest triangle
@@ -126,7 +128,7 @@ Unity won't do that for you on its own. But don't worry, fixing this is really e
 
 ```cs
     
-    class SkinnedMeshCollisionUpdater : MonoBehaviour{
+    class MeshCollisionUpdater : MonoBehaviour{
 
         SkinnedMeshRenderer renderer => GetCompnent<SkinnedMeshRenderer>();
         MeshCollider collider => GetComponent<MeshCollider>();
