@@ -5,7 +5,7 @@ date: 2022-10-6 00:00:20 +0300
 description: Gathering info is important.
 img: pathfinding.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
-tags: [Unity, Learn, Pathfinding]
+tags: [Unity, Learn, Climbing]
 category: Unity
 ---
 

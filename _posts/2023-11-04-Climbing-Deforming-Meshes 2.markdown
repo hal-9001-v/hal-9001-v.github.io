@@ -5,7 +5,7 @@ date: 2023-03-10 00:00:21 +0300
 description: The basic workings of SotC's climbing
 img: Deformingmeshes/AttachedTriangle.png
 fig-caption: # Add figcaption (optional)
-tags: [Unity, Learn, Pathfinding]
+tags: [Unity, Learn, Climbing]
 category: Unity
 ---
 
@@ -20,7 +20,7 @@ Last chapter we talked about the approach we should take. Let's go through the s
 ## Identify the closest triangle ##
 The first step to create our local system is to find the closest triangle to the player. That is, we have to find a way to get the closest triangle from the deforming mesh at hand.
 
-We can achieve this by using raycasting. We cast a ray from the player's position and check for collisions, and try to get the closest one. This function can be implemented in several way, it's up to you. For instance, we can just make a raycast from the player to the origin of the body, which might work for now.
+We can achieve through raycasting. We cast a ray from the player's position and check for collisions, and try to get the closest one. This function can be implemented in several ways, it's up to you. For instance, we can just make a raycast from the player to the origin of the body, which might work for now.
 
 But that approach might not always work. For that reason, we can use some code to find the closest point from a MeshCollider component, so we raycast in the direction of that point. I will not explain the workings of this code since that would take a long time and I don't consider myself the best person to do so.
 
@@ -117,7 +117,7 @@ But that approach might not always work. For that reason, we can use some code t
 ```
 
 <br>
-Once we have identified the closest point, use a raycast from the player to the point.
+Once we have identified the closest point, use a raycast from the player to the point. I am using this code because Unity does not implement a method to find the closest point from a MeshCollider. If you try to use MeshCollider.GetClosestPoint(), you will get a warning log with bad news. That is the case for the 2022 version I used for this, it might change in newer versions.
 
 ## Update the collider ##
 You can skip this step for now if you want to test the climbing over unanimated models. But, if you do use animations, you must make sure that the collision mesh gets updated to the changes caused by the animations. Otherwise, the collision won't match the current status of the model, since it will keep the initial shape of it.
@@ -159,36 +159,80 @@ This code can become expensive if used on complex meshes. For that reason, you m
 ## Map the movement of the triangle to the player ##
 Now that we know which triangle the player is closest to, we need to map the movement of the triangle to the player. As the triangle deforms, we want the player to move along with it.
 
-We can achieve this by calculating the barycentric coordinates of the player's position in relation to the triangle. Barycentric coordinates are a way of expressing a point as a weighted sum of the triangle's vertices. The limitation of this system is we can't use it to store points that do not belong to the planed defined by the triangle. We would need a tethaedron for that, but don't worry we can work around this problem.
+We can achieve this by calculating the barycentric coordinates of the player's position in relation to the triangle. Barycentric coordinates are a way of expressing a point as a weighted sum of the triangle's vertices. The limitation of this system is we can't use it to store points that do not belong to the planed defined by the triangle, and vectors are tricky(can be achieved with 2 points). We would need a tethaedron for that, but don't worry we can work around this problem.
 
 Under these circumstances, we have to find out the closest point in the triangle's plane that is closest to our player. If we are using raycasts for this climbing system, we can just use the hit point for that. On top of that, Unity's RaycastHit struct not only includes the hit point, but the barycentric coords too. So you really should consider using raycasts.
 
+For this purpose, I suggest using a MeshAttacher class. This class will take a RaycastHit, and store the indexes of the colosion, as well as storing the weights.
+
 ```cs
-    
+
+public class MeshAttacher{
+
     Vector3 baryCoords;
     Vector3Int triangleIndexes;
 
-    public Vector3 FindClosestPoint(MeshCollider collider)
+    Transform attachedObject;
+    Mesh mesh;
+
+    public static Vector3 FindClosestPoint(MeshCollider collider)
     {
-        ...
+        ...Use the code above...
     }
 
-    public Vector3 GetUpdatedClimbPosition(){
+    //Use this method with the hit of the Raycast.
+    public void AttachToMesh(RaycastHit hit)
+    {
+        attachedObject = hit.transform;
+        baryCoords = hit.barycentricCoordinate;
+        
+        var meshCollider = hit.transform.GetComponent<MeshCollider>();
+        mesh = meshCollider.sharedMesh;
+        
+        //Consider reading Unity's docs regarding Mesh's properties. These triangles are indexes to vertices in sharedVertices. Quite confusing.
+        var triangles = mesh.triangles;
+
+        //hit.triangleIndex is the id of the colliding triangle in the triangles array. sharedMesh.triangles is an array containing the vertices of each of those 
+        //triangles, which means that the [0] triangle will use vertices 1, 2, 3; [1] triangle uses 4,5,6; [2], 7,8,9 ... Confusing.
+        int tIndex = hit.triangleIndex * 3;
+
+        triangleVertices.x = triangles[tIndex];
+        triangleVertices.y = triangles[tIndex + 1];
+        triangleVertices.z = triangles[tIndex + 2];
+    }
+
+    public Vector3 GetUpdatedClimbPosition()
+    {
         var a = mesh.triangles[trianglesIndexes.x];
         var b = mesh.triangles[trianglesIndexes.y];
         var c = mesh.triangles[trianglesIndexes.z];
         
-        return baryCoords.x * a + baryCoords.y * b + baryCoords.z;
+        //The mesh's vertices are stored in local space, so you have to turn them into world space
+        return attachedObject.TransformPoint(baryCoords.x * a + baryCoords.y * b + baryCoords.z);
     }
 
+    public Vector3 GetUpdatedClimbNormal()
+    {
+        var normals = mesh.normals;
+
+        Vector3 normal = normals[triangleVertices[0]] * baryCoords.x;
+        normal += normals[triangleVertices[1]] * baryCoords.y;
+        normal += normals[triangleVertices[2]] * baryCoords.z;
+
+        //The mesh's normals are stored in local space, so you have to turn them into world space
+        return attachedObject.TransformDirection(normal);
+    }
 
 ```
-Using these coordinates, we can calculate the position of the player on the triangle as it deforms. We can also calculate the player's normal vector based on the average normal of the triangle's vertices. This is important for determining the orientation of the player as it moves along the triangle(player.forward = -triangle.normal).
+
+Using these coordinates, we can calculate the position of the player on the triangle as it deforms. We can also calculate the player's normal vector based on the average normal of the triangle's vertices. This is important for determining the orientation of the player as it moves along the triangle(player.forward = -triangle.normal). Consider "transform.position = GetUpdatedClimbPosition() + GetUpdatedClimbNormal() * distanceToWall";
+
+There are still some problems still, like tracking the up vector of the player as the triangle deforms. You can use another MeshAttacher for that, getting a higher point in the mesh that represents the up of the player, so you can define a vector from one MeshAttacher to the other.
 
 ## Apply forces to the player ##
 With the player position and normal mapped to the deforming triangle, we can apply forces to the player to simulate climbing. The forces applied will depend on the direction the player is moving, as well as the orientation of the triangle.
 
-We can simulate climbing by applying normal forces to the player as it moves along the triangle. We can also use friction forces to simulate the resistance of the surface. Additionally, we can apply gravity forces to the player to simulate the effect of gravity on the climb.
+Now, moving the player along the surface will just mean getting a new point from the mesh on this fashion. For example, in the player's current right and up way. Once hit, move the player to the next point and update the MeshAttacher in the proccess.
 
 ## Adjust the camera ##
 As the player moves along the deforming triangle, we need to adjust the camera to follow the action. We can achieve this by calculating the camera position and orientation based on the position and normal of the player on the triangle.
