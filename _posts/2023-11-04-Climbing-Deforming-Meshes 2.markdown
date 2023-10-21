@@ -3,7 +3,7 @@ layout: post
 title: Climbing Deforming Meshes - Part Two, Maths
 date: 2023-03-10 00:00:21 +0300
 description: The basic workings of SotC's climbing
-img: Deformingmeshes/AttachedTriangle.png
+img: DeformingMeshes/AttachedTriangle.png
 fig-caption: # Add figcaption (optional)
 tags: [Unity, Learn, Climbing]
 category: Unity
@@ -154,6 +154,7 @@ Unity won't do that for you on its own. But don't worry, fixing this is really e
         }
     }
 ```
+
 This code can become expensive if used on complex meshes. For that reason, you may want to optimize it, updating only when needed.
 
 ## Map the movement of the triangle to the player ##
