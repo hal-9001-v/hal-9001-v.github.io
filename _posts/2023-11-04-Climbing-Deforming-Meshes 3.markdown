@@ -3,7 +3,7 @@ layout: post
 title: Climbing Deforming Meshes - Part Three, Enhancing Performance
 date: 2023-03-10 00:00:21 +0300
 description: Exploring methods to boost your climbing system's performance
-img: Deformingmeshes/AttachedTriangle.png
+img: DeformingMeshes/AttachedTriangle.png
 fig-caption: 
 tags: [Unity, Learning, Climbing]
 category: Unity
