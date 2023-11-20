@@ -3,13 +3,13 @@ layout: post
 title: Climbing Deforming Meshes - Part Three, Enhancing Performance
 date: 2023-03-10 00:00:21 +0300
 description: Exploring methods to boost your climbing system's performance
-img: DeformingMeshes/AttachedTriangle.png
+img: DeformingMeshes3/cover.png
 fig-caption: 
 tags: [Unity, Learning, Climbing]
 category: Unity
 ---
 
-In this chapter, we will explore some simple ideas to improve the performance of your climbing system. We'll cover the use of ledges in the next chapter, since these are optional to a climbing system. In fact, if I recall correctly, Praey for the Gods does not make use of them.
+In this chapter, we will explore some simple ideas to improve the performance of your climbing system. We'll cover the use of ledges in the next chapter, since these are optional to a climbing system. In fact, if I recall correctly, Praey for the Gods does not make use of them. I am putting these concepts to use in the following demo: <a href="https://vicma.itch.io/echcolosus">https://vicma.itch.io/echcolosus</a>
 
 Ledges can make your climbs more intricate, although they might not always be necessary, particularly when dealing with deforming meshes. For that reason, check the next chapter after implementing some of the features of this one.
 
@@ -22,6 +22,7 @@ One of the most straightforward(and vital) steps is to create a simplified colli
 <div class="text-center">
     <img src="{{site.baseurl}}/assets/img/DeformingMeshes3/PolyComparison.png" class="rounded" width="500"/>
 </div>
+
 
 
 Players are unlikely to notice the difference. Comparing the two models ripped from the original game, the difference is huge. As a note, the collision model doesn't feature "fingers". It just uses a very thick hand, with no fingers since the gameplay doesn't really interact with them.
@@ -38,6 +39,12 @@ To implement this, create a "MeshColliderUpdaterTrigger" component. This compone
 Similar to simplying colliders, you can divide the colossus's body into multiple colliders, each with its MeshColliderUpdate component. This segmentation reduces the portion of the body that requires updates, given the case that you implement some culling.
 
 Anyways, this measure might be too much in some cases. I am not sure if SotC used this measure, but it makes sense in my head considering that the game had performance problems and this trick surely got into their heads.
+
+<div class="text-center">
+    <img src="{{site.baseurl}}/assets/img/DeformingMeshes3/Side to side.png" class="rounded" width="500"/>
+</div> 
+In the previous picture, we can see a smooth and high detailed mesh, full collision mesh, and segmented mesh.
+
 
 # Using Multiple Update Profiles #
 Not all climbable bodies may require the same update frequency. Consider creating multiple update profiles or manually adjusting the update rate per second based on your specific needs. For example, those deforming meshes that change constantly and are supposed to be interacted by the player, use a high quality setting. For those cases you want, let's say, an arrow stuck in a distant mesh, use a low profile quality.
@@ -86,4 +93,4 @@ class MeshColliderUpdater{
 ```
 
 # Conclusion #
-In this chapter, we explored ways to improve the performance of your climbing system. By simplifying collision meshes, culling unnecessary calculations, segmenting the collision mesh, and utilizing multiple update profiles, you can enhance the player's climbing experience while maintaining optimal performance.
+By simplifying collision meshes, culling unnecessary calculations, segmenting the collision mesh, and utilizing multiple update profiles, you can keep the player's climbing experience while maintaining optimal performance.
