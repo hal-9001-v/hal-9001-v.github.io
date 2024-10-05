@@ -338,7 +338,7 @@ private void OnDrawGizmos()
 There you have it! 
 
 <div>
-    <img src="blog-posts/PathfindingPrinciples/Simplevoxel.png"/>
+    <img src="blog-posts/PathFindingPrinciples/Simplevoxel.png"/>
 </div>
 
 <br/>
