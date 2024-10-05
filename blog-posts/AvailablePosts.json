@@ -28,7 +28,7 @@
     "title": "Pathfinding Guide 1- Voxelization",
     "contentUrl": "PathFindingPrinciples/Pathfinding-principles.md",
     "imgUrl": "PathFindingPrinciples/pathfinding.png",
-    "description": "First part of a series of guides about a custom navmesh pathfinding in Unity",
+    "description": "First part of a series of guides about a custom Navmesh-Pathfinding in Unity",
     "date": "05-10-2022",
     "tags": [ "Unity", "Pathfinding" ]
 
