@@ -5,15 +5,17 @@
 This is it. I got to the end of my University Degree and now it's time to make a Final Degree Proyect. I chose Pathfinding! So here goes another guide about pathfinding!
 
 #### 1.1 Context
-Some time ago, I tried to develop a project with a few friends. The game was entirely inspired by the Sly Cooper series, and I was so excited! Unfortunately, it didn't work out—but hey, I learned a lot.
+Some time ago, I tried to develop a project with a few friends. Such game was completely inspired by the Sly Cooper games and I was so excited! Yet, it did not
+work out(but hey, I learnt a lot).
 
-One of the many problems I faced was Unity's NavMesh tool. Sure, it worked pretty well! In no time, I had my bad guys moving around with very little effort. But then, some issues started to arise.
+One of the (many) problems I faced was Unity's Navmesh tool. Sure, it worked pretty well! In just a moment, I had my bad guys moving around with so little effort. But some problems appeared.
+
 <br/>
 
 #### 1.2 Problem
-I wanted the guards to fly around whenever the player hit them. That required disabling the navigation, applying some physics, and then re-enabling the navigation.
+I wanted guard to fly around everytime the player hit them. That implied disabling the navigation, applying some physics and finally enabling the navigation.
 
-For some reason, warping the agent back onto the NavMesh wasn’t as easy as I expected. In fact, it was painfully tricky. I had to experiment with some functions I found online through a trial-and-error process that sometimes worked and sometimes didn’t.
+For some reason, warping again the agent into the navmesh wasn't so easy. Actually, it was painfully tricky. I needed to play around with some functions with no reasoning but a trial-error proccess I found on the web, and sometimes worked while others it did not.
 
 <div>
     <img src="blog-posts/PathfindingPrinciples/Sil.png" width="500"/>
@@ -24,12 +26,12 @@ For some reason, warping the agent back onto the NavMesh wasn’t as easy as I e
 #### 1.3 The Basics
 It goes like this:
 
-* Agents (bad guys, animals, etc.) need to navigate through space.
-* Space must be represented in code so that it can be easily interpreted by the agents.
-    * This is the challenging part, which can be broken down into:
-        * Understanding how the environment’s collisions affect the agents' navigation.
-        * Organizing that information in a discretized and easily manipulable format.
-* Organizing that information in a discretized and easily manipulable format.
+* Agents(bad guys, animals...) want to move around in space.
+* Space has to be represented in code so it is easily interpreted.
+    * This is the hard part. This task could be divided in:
+        * Figuring out what the enviroment's collisions mean for the agents's navigation
+        * Gathering that info in a discretized and easy to manipulate way
+* Agents take that space representation and find the best path for their purpose.
 
 > Take a look at Nathan R. Sturtevant's Game AI Pro 360P's Search Space Representation
 
@@ -54,8 +56,8 @@ Cons:
 <br>
 
 #### 1.5 Waypoints
+The waypoint representation usually depends on the manual side. Devs put transitable points in the map, connecting them. This implies a low-cost solution, with "easy" implementation.
 
-The waypoint representation usually relies on manual input. Developers place navigable points on the map and connect them. This provides a low-cost solution with relatively "easy" implementation
 <div>
     <img src="blog-posts/PathfindingPrinciples/waypoints.png" width="300"/>
 </div>
@@ -75,7 +77,7 @@ Pros:
 
 
 #### 1.6 Navigation Mesh
-Here comes the star: NavMesh represents the world using polygons, typically generated through Delaunay triangulation.
+Here comes the star. Navmesh consist in a world representation through polygons, usually as a result of Delaunay triangulation.
 
 <div>
     <img src="blog-posts/PathfindingPrinciples/navmesh.png" width="300"/>
@@ -92,7 +94,6 @@ Cons:
 * Dynamic changes are expensive
 * Hard localization
 
-So, like many implementations before me, I’m going to explore and detail the development of a custom NavMesh pathfinding tool.
 
 ### 2. Voxelization
 Using as a reference the following paper, let's dive into the first step for a Navmesh, which is Voxelization.
@@ -108,20 +109,20 @@ Overall, the paper defines these steps as needed for a robust navmesh generation
 <br/>
 
 #### 2.1 Voxelization and vertical segmentation
-It's important to have a basic, raw representation of the world you want to navigate. Voxels are the 3D equivalent of pixels—think of them as tiny cubes that make up the environment.
+It's important to have a basic, raw representation of the world you want to navigate. Voxels are the 3D version of pixels, think of them like cubes.
 
-The first step is to set up voxels to process the world. To do this, you need to gather a list of the objects you want to represent in your graph.
+The first step is setting voxels to proccess the world. For such reason, you should gather a list of the objects you want to represent in your graph.
 
-Why? Because we need to know where to search initially. Otherwise, we would have to check the entire world through collision checks, which would be impractical. 
-Unity provides a useful tool for this purpose: Collider.bounds. Using bounds, we can determine where a collider starts and ends as a fully enclosing box.
-While this box doesn’t perfectly adjust to non-cubic shapes, it’s generally not a major issue.
+Why? Because we must know where to search in the first place. Otherwhise, we should check the whole world through collision-checks, and that would be insane. Unity provides a good 
+tool for such purpose, which is Collider.bounds. Through bounds, we are able to know where a collider "starts", and where it "ends" as a fully containing box. That means the box doesn't adjust perfectly to "non-cubic" shapes, but it is not that big of a problem.
 
-So, you should define a function to check collisions for an object across its entire area. Additionally, you need a way to *determine whether the area is walkable*.
+So, you should define a function to check the collision of an object in its full area. And, *somehow, know when it is walkable*.
 
 <br/>
 
-#### 2.2 Determine whether the area is walkable
-When it's on top, of course! However, storing large amounts of stacked non-top voxels isn't ideal. For this reason, we'll keep track of the highest and lowest coordinates of the span.
+#### 2.2 Somehow know when it is walkable
+When it is on top, of course! Still, storing huge ammounts of stacked up non-top useless voxels is not ideal. For that reason, we will keep track of the highest
+and lowest coordinate of such span.
 
 <div class>
     <img src="blog-posts/PathfindingPrinciples/Unitybasis.png" class="rounded"/>
@@ -129,9 +130,9 @@ When it's on top, of course! However, storing large amounts of stacked non-top v
 
 <br/>
 
-Keep in mind that in Unity, the X and Z axes are horizontal, while the Y axis is vertical.
+Keep in mind that when it comes to Unity, X and Z axis are horizontal. while Y is vertical.
 
-*What is a span?* A span is a vertical section of collision within horizontal (X, Z) coordinates. This means there can be multiple "spans" within a single "tile." From now on, we'll refer to a tile as a specific (X, Z) location, along with all its associated vertical spans (Y).
+*What is a span?* A span is a vertical colliding section in horzintal (X,Y)coordinates, so there can be many "spans" in a single "tile". From now on, let's call tile to a (X,Z) location, with all its (Y)vertical spans.
 
 <div class>
     <img src="blog-posts/PathfindingPrinciples/Tilescheme.png" class="rounded" width="600"/>
@@ -139,8 +140,9 @@ Keep in mind that in Unity, the X and Z axes are horizontal, while the Y axis is
 
 <br/>
 
-For each tile, store its vertical spans. Each vertical span should have a maximum Y coordinate and a minimum Y coordinate. Therefore, maintain a list of spans for each tile.
-If a voxel detects a collision, it represents a new span. However, if there is an existing contiguous span, you should expand the minimum Y or maximum Y of that span rather than adding a new span to the list.
+For each tile, store its vertical spans. Each vertical span, has its maxY coordinate and minY coordinate. For that reason, keep a list of spans in each tile.
+If a voxel detects as colliding, you have a new span. But, if threre is an existing span contiguous span, expand the minY or maxY of such span and don't add a new span to the list.
+
 <br/>
 
 ```cs
@@ -194,7 +196,7 @@ If a voxel detects a collision, it represents a new span. However, if there is a
 ```
 <br/>
 
-The above function is executed for every tile. What's left is to apply this process to every possible tile that covers each collider in our list.
+The above function is executed in every tile. All what's left is executing is in evey possible tile that covers every collider in our list.
 
 <br/>
 
@@ -260,7 +262,7 @@ void Voxelize()
 
 <br/>
 
-That’s pretty much everything. You might be wondering about the `tile.MergeSpans()` function. This function merges spans that are adjacent to other spans within the same tile.
+That's pretty much everything. You may be wondering what is tile.MergeSpans(). That function merges spans which are next to other spans from their own tile.
 
 ```cs
 public void MergeSpans()
@@ -299,7 +301,8 @@ public void MergeSpans()
 <br/>
 
 
-I highly recommend investing some time in visual representation from now on. Each time you update your NavMesh project, make sure it is accurately displayed in your gizmos. You truly can't verify your results without a reliable gizmo visualization.
+I highly recommend you invest some time at visual representation from now on. Every time you update your navmesh project, make sure it is correclty drawn in your gizmos, because you truly can't check your results without a reliable gizmos.
+
 <br/>
 
 ```cs
@@ -332,13 +335,12 @@ private void OnDrawGizmos()
 
 <br/>
 
+There you have it! 
+
 <div>
     <img src="blog-posts/PathfindingPrinciples/Simplevoxel.png"/>
 </div>
 
 <br/>
 
-Take a look at that floating blue volume and its voxelization. It is covered by individual cubic shapes made from voxels, with separate spans below it that are also contained within the same tiles.
-
-### 3. Conclusion
-In this chapter, I covered the first step for creating a NavMesh pathfinding tool: voxelization. This technique is foundational and can be utilized by many different approaches. The next chapter will delve into the following step: triangulation and more!
+Take a look at the at that floating blue volume and its voxelization. It is covered by single cubic shapes made from voxels, with separated spans below it which is contained aswell in the same tiles.

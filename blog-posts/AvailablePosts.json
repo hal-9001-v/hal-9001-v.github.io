@@ -12,7 +12,7 @@
     "contentUrl": "DeformingMeshes2/Climbing-Deforming-Meshes-2.md",
     "imgUrl": "DeformingMeshes2/SOTC.png",
     "description": "An optional continuation about ledges and optimizations for a SotC-like climbing mechanic",
-    "date": "01-09-2024",
+    "date": "05-01-2023",
     "tags": [ "Unity", "SotC", "Procedural", "WIP" ]
   },
   {
@@ -20,7 +20,7 @@
     "contentUrl": "HelloWorld/hello-world.md",
     "imgUrl": "HelloWorld/cover.jpg",
     "description": "A new blog, thhis time in blazor!",
-    "date": "01-09-2024",
+    "date": "17-09-2022",
     "tags": [ "Blog" ]
 
   },
