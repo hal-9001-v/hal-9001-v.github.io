@@ -18,7 +18,7 @@ I wanted guard to fly around everytime the player hit them. That implied disabli
 For some reason, warping again the agent into the navmesh wasn't so easy. Actually, it was painfully tricky. I needed to play around with some functions with no reasoning but a trial-error proccess I found on the web, and sometimes worked while others it did not.
 
 <div>
-    <img src="blog-posts/PathfindingPrinciples/Sil.png" width="500"/>
+    <img src="blog-posts/PathFindingPrinciples/Sil.png" width="500"/>
 </div>
 
 <br/>
@@ -39,7 +39,7 @@ It goes like this:
 This one is the easiest. It simply makes an uniform net wich covers all the space. If there is wall in (X,Y), then grid[x][y] = Wall. This is really easy for manual changes, since it could be easily represented in a text file.
 
 <div>
-    <img src="blog-posts/PathfindingPrinciples/grid.png" width="300"/>
+    <img src="blog-posts/PathFindingPrinciples/grid.png" width="300"/>
 </div>
 
 Pros:
@@ -59,7 +59,7 @@ Cons:
 The waypoint representation usually depends on the manual side. Devs put transitable points in the map, connecting them. This implies a low-cost solution, with "easy" implementation.
 
 <div>
-    <img src="blog-posts/PathfindingPrinciples/waypoints.png" width="300"/>
+    <img src="blog-posts/PathFindingPrinciples/waypoints.png" width="300"/>
 </div>
 <br>
 
@@ -80,7 +80,7 @@ Pros:
 Here comes the star. Navmesh consist in a world representation through polygons, usually as a result of Delaunay triangulation.
 
 <div>
-    <img src="blog-posts/PathfindingPrinciples/navmesh.png" width="300"/>
+    <img src="blog-posts/PathFindingPrinciples/navmesh.png" width="300"/>
 </div>
 <br>
 
@@ -125,7 +125,7 @@ When it is on top, of course! Still, storing huge ammounts of stacked up non-top
 and lowest coordinate of such span.
 
 <div class>
-    <img src="blog-posts/PathfindingPrinciples/Unitybasis.png" class="rounded"/>
+    <img src="blog-posts/PathFindingPrinciples/Unitybasis.png" class="rounded"/>
 </div>
 
 <br/>
@@ -135,7 +135,7 @@ Keep in mind that when it comes to Unity, X and Z axis are horizontal. while Y i
 *What is a span?* A span is a vertical colliding section in horzintal (X,Y)coordinates, so there can be many "spans" in a single "tile". From now on, let's call tile to a (X,Z) location, with all its (Y)vertical spans.
 
 <div class>
-    <img src="blog-posts/PathfindingPrinciples/Tilescheme.png" class="rounded" width="600"/>
+    <img src="blog-posts/PathFindingPrinciples/Tilescheme.png" class="rounded" width="600"/>
 </div>
 
 <br/>
